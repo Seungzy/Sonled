@@ -1,24 +1,364 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="26100" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NAV-001">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="26100"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Navigation Controller-->
+        <scene sceneID="SCN-NAV">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <navigationController id="NAV-001" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NAV-BAR"/>
+                    <connections>
+                        <segue destination="SUB-001" kind="relationship" relationship="rootViewController" id="ROOT-SEG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FR-NAV" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-900" y="0"/>
+        </scene>
+        <!--Subjects-->
+        <scene sceneID="SCN-SUB">
+            <objects>
+                <tableViewController id="SUB-001" customClass="SubjectsViewController" customModule="StudentOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" dataMode="prototypes" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SUB-TABLE">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SubjectCell" id="SUB-CELL">
+                                <rect key="frame" x="0.0" y="50" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SUB-CELL" id="SUB-CONTENT">
+                                    <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="SUB-001" id="SUB-DS"/>
+                            <outlet property="delegate" destination="SUB-001" id="SUB-DG"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="My Subjects" id="SUB-NAV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SUB-ADD">
+                            <connections>
+                                <action selector="addSubjectTapped:" destination="SUB-001" id="ACT-SUB-ADD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="TASK-001" kind="show" identifier="ShowTasksSegue" id="SEG-TASKS"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FR-SUB" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-150" y="0"/>
+        </scene>
+        <!--Tasks-->
+        <scene sceneID="SCN-TASK">
+            <objects>
+                <tableViewController id="TASK-001" customClass="TasksViewController" customModule="StudentOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" dataMode="prototypes" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="TASK-TABLE">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskCell" id="TASK-CELL">
+                                <rect key="frame" x="0.0" y="50" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TASK-CELL" id="TASK-CONTENT">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="TASK-001" id="TASK-DS"/>
+                            <outlet property="delegate" destination="TASK-001" id="TASK-DG"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Tasks" id="TASK-NAV">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="TASK-ADD">
+                                <connections>
+                                    <action selector="addTaskTapped:" destination="TASK-001" id="ACT-TASK-ADD"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Notes" id="TASK-NOTES">
+                                <connections>
+                                    <action selector="notesTapped:" destination="TASK-001" id="ACT-TASK-NOTES"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="TFORM-001" kind="show" identifier="ShowTaskFormSegue" id="SEG-TFORM"/>
+                        <segue destination="NOTES-001" kind="show" identifier="ShowNotesSegue" id="SEG-NOTES"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FR-TASK" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="620" y="-160"/>
+        </scene>
+        <!--Task Form-->
+        <scene sceneID="SCN-TFORM">
+            <objects>
+                <viewController id="TFORM-001" customClass="TaskFormViewController" customModule="StudentOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TFORM-VIEW">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-STACK">
+                                <rect key="frame" x="20" y="123" width="353" height="406"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-TITLE-LABEL"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" placeholder="Task title" textAlignment="natural" borderStyle="roundedRect" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-TITLE"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Details (optional)" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-DETAILS-LABEL"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-DETAILS">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="TFORM-DETAILS-H"/>
+                                        </constraints>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Due Date" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-DATE-LABEL"/>
+                                    <datePicker contentMode="scaleToFill" datePickerMode="dateAndTime" preferredDatePickerStyle="compact" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-DATE"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Priority" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-PRIORITY-LABEL"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-PRIORITY">
+                                        <segments>
+                                            <segment title="Low"/>
+                                            <segment title="Medium"/>
+                                            <segment title="High"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-COMPLETE-ROW">
+                                        <rect key="frame" x="0.0" y="369" width="353" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Completed" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-COMPLETE-LABEL"/>
+                                            <switch opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFORM-SWITCH"/>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="TFORM-SAFE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TFORM-STACK" firstAttribute="top" secondItem="TFORM-SAFE" secondAttribute="top" constant="20" id="TFORM-TOP"/>
+                            <constraint firstItem="TFORM-STACK" firstAttribute="leading" secondItem="TFORM-SAFE" secondAttribute="leading" constant="20" id="TFORM-LEAD"/>
+                            <constraint firstItem="TFORM-SAFE" firstAttribute="trailing" secondItem="TFORM-STACK" secondAttribute="trailing" constant="20" id="TFORM-TRAIL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Task" id="TFORM-NAV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="TFORM-SAVE">
+                            <connections>
+                                <action selector="saveTapped:" destination="TFORM-001" id="ACT-TFORM-SAVE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="completedSwitch" destination="TFORM-SWITCH" id="OUT-TFORM-SWITCH"/>
+                        <outlet property="detailsTextView" destination="TFORM-DETAILS" id="OUT-TFORM-DETAILS"/>
+                        <outlet property="dueDatePicker" destination="TFORM-DATE" id="OUT-TFORM-DATE"/>
+                        <outlet property="prioritySegmentedControl" destination="TFORM-PRIORITY" id="OUT-TFORM-PRIORITY"/>
+                        <outlet property="titleTextField" destination="TFORM-TITLE" id="OUT-TFORM-TITLE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FR-TFORM" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1400" y="-420"/>
+        </scene>
+        <!--Notes-->
+        <scene sceneID="SCN-NOTES">
+            <objects>
+                <viewController id="NOTES-001" customClass="NotesViewController" customModule="StudentOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NOTES-VIEW">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NOTES-COLLECTION">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="12" id="NOTES-LAYOUT">
+                                    <size key="itemSize" width="170" height="210"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="12" minY="12" maxX="12" maxY="12"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoteCell" id="NOTE-CELL" customClass="NoteCell" customModule="StudentOrganizer" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="12" width="170" height="210"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="NOTE-CONTENT">
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="210"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NOTE-IMAGE"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" translatesAutoresizingMaskIntoConstraints="NO" id="NOTE-LABEL">
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="NOTE-IMAGE" firstAttribute="top" secondItem="NOTE-CONTENT" secondAttribute="top" id="NC-I-T"/>
+                                                <constraint firstItem="NOTE-IMAGE" firstAttribute="leading" secondItem="NOTE-CONTENT" secondAttribute="leading" id="NC-I-L"/>
+                                                <constraint firstAttribute="trailing" secondItem="NOTE-IMAGE" secondAttribute="trailing" id="NC-I-R"/>
+                                                <constraint firstItem="NOTE-IMAGE" firstAttribute="width" secondItem="NOTE-IMAGE" secondAttribute="height" multiplier="1:1" id="NC-I-A"/>
+                                                <constraint firstItem="NOTE-LABEL" firstAttribute="top" secondItem="NOTE-IMAGE" secondAttribute="bottom" constant="4" id="NC-L-T"/>
+                                                <constraint firstItem="NOTE-LABEL" firstAttribute="leading" secondItem="NOTE-CONTENT" secondAttribute="leading" constant="8" id="NC-L-L"/>
+                                                <constraint firstAttribute="trailing" secondItem="NOTE-LABEL" secondAttribute="trailing" constant="8" id="NC-L-R"/>
+                                                <constraint firstAttribute="bottom" secondItem="NOTE-LABEL" secondAttribute="bottom" constant="4" id="NC-L-B"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="noteLabel" destination="NOTE-LABEL" id="OUT-NOTE-LABEL"/>
+                                            <outlet property="photoImageView" destination="NOTE-IMAGE" id="OUT-NOTE-IMAGE"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NOTES-SAFE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NOTES-COLLECTION" firstAttribute="top" secondItem="NOTES-SAFE" secondAttribute="top" id="NOTES-T"/>
+                            <constraint firstItem="NOTES-COLLECTION" firstAttribute="leading" secondItem="NOTES-SAFE" secondAttribute="leading" id="NOTES-L"/>
+                            <constraint firstItem="NOTES-SAFE" firstAttribute="trailing" secondItem="NOTES-COLLECTION" secondAttribute="trailing" id="NOTES-R"/>
+                            <constraint firstItem="NOTES-SAFE" firstAttribute="bottom" secondItem="NOTES-COLLECTION" secondAttribute="bottom" id="NOTES-B"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Notes" id="NOTES-NAV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="NOTES-ADD">
+                            <connections>
+                                <action selector="addNoteTapped:" destination="NOTES-001" id="ACT-NOTES-ADD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="NOTES-COLLECTION" id="OUT-NOTES-COLLECTION"/>
+                        <segue destination="NFORM-001" kind="show" identifier="ShowNoteFormSegue" id="SEG-NFORM"/>
+                        <segue destination="NDETAIL-001" kind="show" identifier="ShowNoteDetailSegue" id="SEG-NDETAIL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FR-NOTES" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1400" y="220"/>
+        </scene>
+        <!--Note Form-->
+        <scene sceneID="SCN-NFORM">
+            <objects>
+                <viewController id="NFORM-001" customClass="NoteFormViewController" customModule="StudentOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NFORM-VIEW">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="NFORM-STACK">
+                                <rect key="frame" x="20" y="123" width="353" height="443"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFORM-NOTE-LABEL"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NFORM-TEXT">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="NFORM-TEXT-H"/>
+                                        </constraints>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Photo (optional)" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFORM-PHOTO-LABEL"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NFORM-IMAGE">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="NFORM-IMAGE-H"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" translatesAutoresizingMaskIntoConstraints="NO" id="NFORM-CHOOSE">
+                                        <state key="normal" title="Choose Photo"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Choose Photo"/>
+                                        <connections>
+                                            <action selector="choosePhotoTapped:" destination="NFORM-001" eventType="touchUpInside" id="ACT-NFORM-CHOOSE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NFORM-SAFE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NFORM-STACK" firstAttribute="top" secondItem="NFORM-SAFE" secondAttribute="top" constant="20" id="NFORM-T"/>
+                            <constraint firstItem="NFORM-STACK" firstAttribute="leading" secondItem="NFORM-SAFE" secondAttribute="leading" constant="20" id="NFORM-L"/>
+                            <constraint firstItem="NFORM-SAFE" firstAttribute="trailing" secondItem="NFORM-STACK" secondAttribute="trailing" constant="20" id="NFORM-R"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Note" id="NFORM-NAV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="NFORM-SAVE">
+                            <connections>
+                                <action selector="saveTapped:" destination="NFORM-001" id="ACT-NFORM-SAVE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="noteTextView" destination="NFORM-TEXT" id="OUT-NFORM-TEXT"/>
+                        <outlet property="photoImageView" destination="NFORM-IMAGE" id="OUT-NFORM-IMAGE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FR-NFORM" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2200" y="0"/>
+        </scene>
+        <!--Note Detail-->
+        <scene sceneID="SCN-NDETAIL">
+            <objects>
+                <viewController id="NDETAIL-001" customClass="NoteDetailViewController" customModule="StudentOrganizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NDETAIL-VIEW">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="fill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="NDETAIL-STACK">
+                                <rect key="frame" x="20" y="123" width="353" height="421"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NDETAIL-IMAGE">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="NDETAIL-IMAGE-H"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDETAIL-DATE">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Note text" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="NDETAIL-NOTE"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" translatesAutoresizingMaskIntoConstraints="NO" id="NDETAIL-DELETE">
+                                        <color key="tintColor" systemColor="systemRedColor"/>
+                                        <state key="normal" title="Delete Note"/>
+                                        <connections>
+                                            <action selector="deleteTapped:" destination="NDETAIL-001" eventType="touchUpInside" id="ACT-NDETAIL-DELETE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NDETAIL-SAFE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NDETAIL-STACK" firstAttribute="top" secondItem="NDETAIL-SAFE" secondAttribute="top" constant="20" id="NDETAIL-T"/>
+                            <constraint firstItem="NDETAIL-STACK" firstAttribute="leading" secondItem="NDETAIL-SAFE" secondAttribute="leading" constant="20" id="NDETAIL-L"/>
+                            <constraint firstItem="NDETAIL-SAFE" firstAttribute="trailing" secondItem="NDETAIL-STACK" secondAttribute="trailing" constant="20" id="NDETAIL-R"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Note" id="NDETAIL-NAV"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="NDETAIL-DATE" id="OUT-NDETAIL-DATE"/>
+                        <outlet property="deleteButton" destination="NDETAIL-DELETE" id="OUT-NDETAIL-DELETE"/>
+                        <outlet property="noteLabel" destination="NDETAIL-NOTE" id="OUT-NDETAIL-NOTE"/>
+                        <outlet property="photoImageView" destination="NDETAIL-IMAGE" id="OUT-NDETAIL-IMAGE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FR-NDETAIL" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2200" y="480"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="secondaryLabelColor"><color red="0.235" green="0.235" blue="0.263" alpha="0.6" colorSpace="custom" customColorSpace="sRGB"/></systemColor>
+        <systemColor name="systemBackgroundColor"><color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/></systemColor>
+        <systemColor name="systemRedColor"><color red="1" green="0.231" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/></systemColor>
+    </resources>
 </document>
